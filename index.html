@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unit Converter</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 420px; margin: 40px auto; padding: 0 16px; }
+    label { display: block; margin-top: 14px; }
+    input, select { width: 100%; padding: 8px; font-size: 16px; box-sizing: border-box; }
+    button { margin-top: 18px; padding: 10px 18px; font-size: 16px; cursor: pointer; }
+    #result { margin-top: 18px; font-size: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Unit Converter</h1>
+
+  <label>Value
+    <input id="value" type="number" value="100">
+  </label>
+  <label>Conversion
+    <select id="type"></select>
+  </label>
+
+  <button onclick="showResult()">Convert</button>
+  <p id="result"></p>
+
+  <script src="convert.js"></script>
+  <script>
+    // Fill the dropdown with every conversion listed in convert.js
+    const select = document.getElementById("type");
+    for (const key in CONVERSIONS) {
+      const option = document.createElement("option");
+      option.value = key;
+      option.textContent = CONVERSIONS[key].label;
+      select.appendChild(option);
+    }
+
+    function showResult() {
+      const value = Number(document.getElementById("value").value);
+      const out = document.getElementById("result");
+      try {
+        out.textContent = convert(value, select.value);
+      } catch (error) {
+        out.textContent = error.message;
+      }
+    }
+  </script>
+</body>
+</html>
