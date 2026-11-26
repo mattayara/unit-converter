@@ -22,12 +22,24 @@ function milesToKm(miles) {
   return round2(miles * 1.609344);
 }
 
+function kgToPounds(kg) {
+  if (kg < 0) throw new Error("Weight can't be negative");
+  return round2(kg * 2.20462);
+}
+
+function poundsToKg(lb) {
+  if (lb < 0) throw new Error("Weight can't be negative");
+  return round2(lb * 0.453592);
+}
+
 // Every conversion the page offers. Add a line here and it appears in the dropdown.
 const CONVERSIONS = {
   "c-f": { label: "Celsius → Fahrenheit", from: "°C", to: "°F", fn: celsiusToFahrenheit },
   "f-c": { label: "Fahrenheit → Celsius", from: "°F", to: "°C", fn: fahrenheitToCelsius },
   "km-mi": { label: "Kilometres → Miles", from: "km", to: "mi", fn: kmToMiles },
   "mi-km": { label: "Miles → Kilometres", from: "mi", to: "km", fn: milesToKm },
+  "kg-lb": { label: "Kilograms → Pounds", from: "kg", to: "lb", fn: kgToPounds },
+  "lb-kg": { label: "Pounds → Kilograms", from: "lb", to: "kg", fn: poundsToKg },
 };
 
 function convert(value, type) {
@@ -38,5 +50,5 @@ function convert(value, type) {
 
 // Lets the test file (Node.js) use these functions. The browser ignores this.
 if (typeof module !== "undefined") {
-  module.exports = { celsiusToFahrenheit, fahrenheitToCelsius, kmToMiles, milesToKm, convert };
+  module.exports = { celsiusToFahrenheit, fahrenheitToCelsius, kmToMiles, milesToKm, kgToPounds, poundsToKg, convert };
 }
